@@ -1,6 +1,7 @@
 from src.models.abstract_model import AbstractModel
 from src.database.db import db
 
+
 class LanguageModel(AbstractModel):
     _collection = db.languages
 
@@ -12,3 +13,8 @@ class LanguageModel(AbstractModel):
             "name": self.data.get("name"),
             "acronym": self.data.get("acronym")
         }
+
+    @classmethod
+    def list_dicts(cls):
+        languages = cls.find()
+        return [language.to_dict() for language in languages]
